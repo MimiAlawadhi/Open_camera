@@ -1,0 +1,29 @@
+
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>افتح الكاميرا</title>
+</head>
+<body style="text-align: center; font-family: sans-serif; background-color: #f0f0f0;">
+  <h2>اضغط الزر لتشغيل الكاميرا الأمامية</h2>
+  <button onclick="startCamera()" style="padding: 10px 20px; font-size: 16px;">تشغيل الكاميرا</button>
+  <br><br>
+  <video id="video" width="100%" autoplay playsinline style="max-width: 400px;"></video>
+
+  <script>
+    async function startCamera() {
+      try {
+        const video = document.getElementById('video');
+        const stream = await navigator.mediaDevices.getUserMedia({
+          video: { facingMode: "user" }, audio: false
+        });
+        video.srcObject = stream;
+      } catch (err) {
+        alert("تعذر تشغيل الكاميرا: " + err.message);
+      }
+    }
+  </script>
+</body>
+</html>
